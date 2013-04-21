@@ -1,18 +1,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% game.pl  
+% game.pl
 %
 % Use this as the starting point for your game.  This starter code includes
 % the following:
 %  - Two example areas
-%  - An example of how you might connect those areas 
+%  - An example of how you might connect those areas
 %  - Handling of the actions 'go _______.', 'help.', and 'quit.'
-%  - Basic input processing which strips punctuation and puts the words into a list 
+%  - Basic input processing which strips punctuation and puts the words into a list
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- use_module(library(readln)).
 
 % Use this dynamic fact to store the player's current location
-:- dynamic current_area/1.	
+:- dynamic current_area/1.
 
 % Here is one way you might create your areas
 area(exampleArea1, 'First Area', 'You find yourself in a simple example area').
@@ -33,7 +33,7 @@ play :-
 % Prints out the players current location description
 print_location :-
     current_area(Current),
-    area(Current, _, Description), write(Description), nl. 
+    area(Current, _, Description), write(Description), nl.
 
 % Changes the players current location, validity of change is checked earlier
 change_area(NewArea) :-
@@ -65,7 +65,7 @@ get_input([quit]).
 get_input(Input) :-
     process_input(Input), print_location,
     read_sentence(Input1), get_input(Input1).
-	
+
 % Reads a sentence from the prompt
 read_sentence(Input) :-
     readln(Input1, _, ".!?", "_0123456789", lowercase),
