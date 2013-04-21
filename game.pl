@@ -52,6 +52,8 @@ process_input([go, Direction]) :-
     change_area(NewRoom).
 process_input([go, _]) :-
     print('You hit an invisible wall and can\'t go that way'), nl, nl.
+process_input([exit]) :-
+
 process_input([_]) :-
     print('No idea what you are talking about...try again'), nl, nl.
 
@@ -63,6 +65,7 @@ process_input([help]) :- print('Add some help output here...'), nl.
 % Get input from the user
 get_input :- read_sentence(Input), get_input(Input).
 get_input([quit]).
+get_input([exit]).
 get_input(Input) :-
     process_input(Input), print_location,
     read_sentence(Input1), get_input(Input1).
