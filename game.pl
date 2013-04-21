@@ -10,6 +10,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- use_module(library(readln)).
+:- use_module(describe).
 
 % Use this dynamic fact to store the player's current location
 :- dynamic current_area/1.
