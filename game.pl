@@ -20,7 +20,8 @@
 % This rule starts everything off
 play :-
     retractall(player_location(_)),
-    assertz(player_location(head)),
+    assertz(player_location(bridge)),
+    describe(intro),
     print_location,
 	dispPrompt,
     get_input.
