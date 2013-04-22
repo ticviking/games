@@ -1,5 +1,24 @@
-:- module(locations, [connected/3]).
+:- module(locations, [connected/3,
+                                     op(50, xfx, in),
+                                     op(60, fx, place),
+                                    in/2,
+                                    place/1]).
 
+:- dynamic in/2.
+
+place(X in New) :-
+  not(X in _ ),
+  assert(X in New).
+
+place(X in New):-
+  X in Old,
+  retract(X in Old),
+  assert(X in New).
+
+%initial item placement
+:-
+  place infinate_wrenches in inventory,
+  place captain in bridge.
 
 
 connected(bridge, south, ballroom).
@@ -16,7 +35,5 @@ connected(hall, west, cargo_bay).
 connected(cargo_bay, east, hall).
 connected(engineering, north, hall).
 connected(head, west, hall).
-
-%TODO - how does the toilet connect head to pipes
 
 %TODO - Space movement(with throw)
