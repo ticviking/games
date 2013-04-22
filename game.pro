@@ -60,19 +60,23 @@ process_input([north]):- process_input([go, north]).
 process_input([south]):- process_input([go, south]).
 process_input([east]):- process_input([go, east]).
 process_input([west]):- process_input([go, west]).
-
 process_input([go, _]) :-
+    not(player in space),
     print('You hit an invisible wall and can\'t go that way'), nl, nl.
+process_input([go, _]) :-
+  player in space,
+  print('How, you don\'t have anything to push off of!').
 
 process_input([exit]) .
 process_input([quit]).
 
 % Add some help output here to explain how to play your game
-process_input([help]) :- print('Add some help output here...'), nl.
+process_input([help]) :-
+  describe(help), nl.
 
 % Unknown Input
 process_input([_]) :-
-    print('No idea what you are talking about...try again'), nl, nl.
+    writef("Just thinking about it makes your head hurt, maybe you should try something else"), nl, nl.
 
 %%%% Below is just some basic input handling, you probably don't have to mess with it %%%%
 

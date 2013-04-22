@@ -21,7 +21,23 @@ short_describe(X) :-
 short_describe(X) :-
   writef("I don't know what %t is.", [X]), nl.
 
-
+describe(help, [
+  'You are very hungover, and don\'t remember how to do much. You do remember\n',
+  'how to do these things though:\n=====\n',
+  'help - help yourself out by remembering how to do things.\n',
+  'go [direction] - attempt to move in a direction.\n',
+  'take, pick up, loot [item] - try to take an item and put it in your inventory.\n',
+  'drop, litter - leave an item somewhere.\n',
+  'inventory, pockets - see what you\'re carrying around with you.\n',
+  'look, inspect [item]- take a closer look at something.\n',
+  'give [item] [charity case] - had something to someone, or thing, or not thing\n\tas the case may be.\n',
+  'talk [thing] - talk to something, if it likes you it may even talk back at you.\n',
+  'open [thing] - try to open something, like another beer, or a fridge to get another beer.\n',
+  'use [thing] - try to use something.\n',
+  'flush [toilet] - you don\'t know of anything else that you flush.\n',
+  'throw [object] at [target] - toss object at target.\n'
+  ],
+  "You can't help yourself that way").
 
 describe(intro, [
   'You awaken to a crushing headache.\n\n',
