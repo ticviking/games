@@ -8,7 +8,8 @@
 %  - Handling of the actions 'go _______.', 'help.', and 'quit.'
 %  - Basic input processing which strips punctuation and puts the words into a list
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% allow use of .pro
+user:prolog_file_type(pro, prolog).
 :- use_module(library(readln)).
 :- use_module(describe).
 :- use_module(locations).
@@ -80,4 +81,4 @@ strip_punctuation([Word|Tail], [Word|Result]) :-
     \+(member(Word, ['.', ',', '?', '!'])),
     strip_punctuation(Tail, Result).
 strip_punctuation([_|Tail], Result) :-
-    strip_punctuation(Tail, Result).
+    strip_punctuation(Tail, Result).
