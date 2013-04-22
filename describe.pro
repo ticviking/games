@@ -1,14 +1,16 @@
 % Storing Text for descriptions
 :- module(describe, [describe/1, short_describe/1]).
 
-describe(X) :-
-  describe(X, Y, _),
-  writef(Y), nl.
-% describe a multi line item.
+% describe a multi line item. Workaround for max string lengths by keeping strings less than 80.
 describe(X) :-
   describe(X,Y, _),
   is_list(Y),
   writelist(Y).
+%single line item
+describe(X) :-
+  describe(X, Y, _),
+  writef(Y), nl.
+
 describe(X) :-
   writef("I don't know what %t is.", [X]), nl.
 
@@ -19,24 +21,24 @@ short_describe(X) :-
   writef("I don't know what %t is.", X), nl.
 
   writelist([Head|Tail]) :-
-  writef(Head), nl, writelist(Tail).
+  writef(Head), writelist(Tail).
   writelist([]).
 
 describe(intro, [
-  'You awaken to a crushing headache.',
-  'As you pry your eyes open you see the CAPTAIN running about and pushing buttons',
-  'in a distinctly sciency manner. \"Crewman Tom Tightpants! Have you awoken?\"',
-  'You take several long moments to realize that yes. That is in fact who you are...',
-  'probably. He presses a series of buttons, and howls. \"It’s Madd! Madd I say!\" The',
-  'words \"Dangerously Sober\" flash across a number of gratuitisly shiny panels cause',
-  'this is the future if you couldn’t guess.',
-  '\"Whose crazy and or angry sir?\" ',
-  '\"No! Mothers Against Drunk Driving! They found us!\"',
-  '\"But we’re driving a cutting edge spaceship that run entirely',
-  'on alcohol!\" You say as way of exposition.',
-  '\"That’s probably why they’re after us. Their Sobriety Beam killed our engine',
-  'and if we don’t cure the ships hangover, we’re dead in the water."',
-  '\"Well... I guess I’m on the case!\"'],
+  'You awaken to a crushing headache.\n\n',
+  'As you pry your eyes open you see the CAPTAIN running about and pushing buttons\n',
+  'in a distinctly sciency manner. \"Crewman Tom Tightpants! Have you woken up?\"\n\n',
+  'You take several long moments to realize that yes. That is in fact who you are...\n',
+  'probably.\n\n He presses a series of buttons, and howls. \"It’s Madd! Madd I say!\"\n The',
+  'words \"Dangerously Sober\" flash across a number of gratuitisly shiny panels cause\n',
+  'this is the future if you couldn’t guess.\n',
+  '\"Whose crazy and or angry sir?\" \n',
+  '\"No! Mothers Against Drunk Driving! They found us!\"\n',
+  '\"But we’re driving a cutting edge spaceship that run entirely\n',
+  'on alcohol!\" You say as way of exposition.\n',
+  '\"That’s probably why they’re after us. Their Sobriety Beam killed our engine\n',
+  'and if we don’t cure the ships hangover, we’re dead in the water."\n',
+  '\"Well... I guess I’m on the case!\"\n'],
 "There is no short way to introduce this adventure!").
 
 % Locations Descriptions.
