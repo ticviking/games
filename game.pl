@@ -11,21 +11,16 @@
 
 :- use_module(library(readln)).
 :- use_module(describe).
+:- use_module(locations).
 
 % Use this dynamic fact to store the player's current location
 :- dynamic player_location/1.
 
-% 
-
-
-% You might connect those areas like this:
-connected(north, exampleArea1, exampleArea2).
-connected(south, exampleArea2, exampleArea1).
 
 % This rule starts everything off
 play :-
     retractall(player_location(_)),
-    assertz(player_location(exampleArea1)),
+    assertz(player_location(head)),
     print_location,
 	dispPrompt,
     get_input.
@@ -33,7 +28,7 @@ play :-
 % Prints out the players current location description
 print_location :-
     player_location(Current),
-    area(Current, _, Description), write(Description), nl.
+    describe(Current), nl.
 
 % Changes the players current location, validity of change is checked earlier
 change_area(NewArea) :-
@@ -47,17 +42,21 @@ dispPrompt :- prompt(_, '> ').
 % Handling of the action 'go _______', and a good example of how you might implement others
 process_input([go, Direction]) :-
     player_location(Current),
-    connected(Direction, Current, NewRoom),
+    connected(Current, Direction, NewRoom),
     change_area(NewRoom).
+
 process_input([go, _]) :-
     print('You hit an invisible wall and can\'t go that way'), nl, nl.
-process_input([exit]) :-
 
-process_input([_]) :-
-    print('No idea what you are talking about...try again'), nl, nl.
+process_input([exit]) .
+process_input([quit]).
 
 % Add some help output here to explain how to play your game
 process_input([help]) :- print('Add some help output here...'), nl.
+
+% Unknown Input
+process_input([_]) :-
+    print('No idea what you are talking about...try again'), nl, nl.
 
 %%%% Below is just some basic input handling, you probably don't have to mess with it %%%%
 
@@ -80,4 +79,4 @@ strip_punctuation([Word|Tail], [Word|Result]) :-
     \+(member(Word, ['.', ',', '?', '!'])),
     strip_punctuation(Tail, Result).
 strip_punctuation([_|Tail], Result) :-
-    strip_punctuation(Tail, Result).
+    strip_punctuation(Tail, Result).
