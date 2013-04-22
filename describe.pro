@@ -87,13 +87,13 @@ describe(head,
 describe(pipes,
   "A pipes long",
   "A pipes short").
-describe(space,
+describe(near_space,
   "A space long",
   "A space short").
 describe(pill_space,
   "A pill_space long",
   "A pill_space short").
-describe(smAdF,
+describe(smAdF_space,
   "A smAdF long",
   "A smAdF short").
 describe(junk_heap,

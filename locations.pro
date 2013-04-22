@@ -6,6 +6,17 @@
 
 :- dynamic in/2.
 
+player in space :-
+  player in near_space;
+  player in pill_space;
+  player in smadf_space;
+  player in junk_heap;
+  player in deep_space;
+  player in deeper_space;
+  player in deepest_space;
+  player in nothing_space;
+  player in achievement_space.
+
 place(X in New) :-
   not(X in _ ),
   assert(X in New).
@@ -66,5 +77,3 @@ connected(hall, west, cargo_bay).
 connected(cargo_bay, east, hall).
 connected(engineering, north, hall).
 connected(head, west, hall).
-
-%TODO - Space movement(with throw)
