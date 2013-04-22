@@ -14,9 +14,9 @@ short-describe(X) :-
 describe(bridge,
   "A bridge long",
   "A bridge short").
-describe(Quarters,
-  "A Quarters long",
-  "A Quarters short").
+describe(quarters,
+  "A quarters long",
+  "A quarters short").
 describe(ballroom,
   "A ballroom long",
   "A ballroom short").
@@ -44,9 +44,9 @@ describe(space,
 describe(pill_space,
   "A pill_space long",
   "A pill_space short").
-describe(SmAdF,
-  "A SmAdF long",
-  "A SmAdF short").
+describe(smAdF,
+  "A smAdF long",
+  "A smAdF short").
 describe(junk_heap,
   "A junk_heap long",
   "A junk_heap short").
@@ -92,9 +92,9 @@ describe(motorbike,
 describe(hanger_door,
   "A hanger_door long",
   "A hanger_door short").
-describe(shrink_ray),
-  "A shrink_ray) long",
-  "A shrink_ray) short").
+describe(shrink_ray,
+  "A shrink_ray long",
+  "A shrink_ray short").
 describe(fuel_storage,
   "A fuel_storage long",
   "A fuel_storage short").
