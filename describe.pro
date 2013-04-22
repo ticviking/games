@@ -17,7 +17,7 @@ describe(X) :-
 
 short_describe(X) :-
   describe(X,_,Y) ,
-  writef(Y), nl.
+  writef(Y).
 short_describe(X) :-
   writef("I don't know what %t is.", [X]), nl.
 

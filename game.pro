@@ -74,6 +74,13 @@ process_input([quit]).
 process_input([help]) :-
   describe(help), nl.
 
+% take item generic
+process_input([take, Item]) :-
+  player_location(Current),
+  Item in Current,
+  place Item in inventory,
+  writef("You take "), short_describe(Item), writef(" and place it in your inventory.").
+
 % Unknown Input
 process_input([_]) :-
     writef("Just thinking about it makes your head hurt, maybe you should try something else"), nl, nl.
