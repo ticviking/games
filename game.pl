@@ -13,11 +13,10 @@
 :- use_module(describe).
 
 % Use this dynamic fact to store the player's current location
-:- dynamic current_area/1.
+:- dynamic player_location/1.
 
-% Here is one way you might create your areas
-area(exampleArea1, 'First Area', 'You find yourself in a simple example area').
-area(exampleArea2, 'Second Area', 'You look around and find yourself in a an area...full of nothing').
+% 
+
 
 % You might connect those areas like this:
 connected(north, exampleArea1, exampleArea2).
@@ -25,29 +24,29 @@ connected(south, exampleArea2, exampleArea1).
 
 % This rule starts everything off
 play :-
-    retractall(current_area(_)),
-    assertz(current_area(exampleArea1)),
+    retractall(player_location(_)),
+    assertz(player_location(exampleArea1)),
     print_location,
 	dispPrompt,
     get_input.
 
 % Prints out the players current location description
 print_location :-
-    current_area(Current),
+    player_location(Current),
     area(Current, _, Description), write(Description), nl.
 
 % Changes the players current location, validity of change is checked earlier
 change_area(NewArea) :-
-    current_area(Current),
-    retract(current_area(Current)),
-    assertz(current_area(NewArea)).
+    player_location(Current),
+    retract(player_location(Current)),
+    assertz(player_location(NewArea)).
 
 % Displays the player prompt so they can enter actions
 dispPrompt :- prompt(_, '> ').
 
 % Handling of the action 'go _______', and a good example of how you might implement others
 process_input([go, Direction]) :-
-    current_area(Current),
+    player_location(Current),
     connected(Direction, Current, NewRoom),
     change_area(NewRoom).
 process_input([go, _]) :-
