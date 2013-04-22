@@ -14,8 +14,9 @@ user:prolog_file_type(pro, prolog).
 :- use_module(describe).
 :- use_module(locations).
 
-% Use this dynamic fact to store the player's current location
-:- dynamic player_location/1.
+% Players current location
+player_location(Location) :-
+  player in Location.
 
 %dynamic facts for the win condition
 :- dynamic smadf_distracted/0.
@@ -23,10 +24,8 @@ user:prolog_file_type(pro, prolog).
 
 % This rule starts everything off
 play :-
-    retractall(player_location(_)),
     retractall(smadf_distracted),
     retractall(ship_started),
-    assertz(player_location(bridge)),
     describe(intro),
     print_location,
     dispPrompt,
@@ -47,9 +46,7 @@ print_location :-
 
 % Changes the players current location, validity of change is checked earlier
 change_area(NewArea) :-
-    player_location(Current),
-    retract(player_location(Current)),
-    assertz(player_location(NewArea)).
+    place player in NewArea.
 
 % Displays the player prompt so they can enter actions
 dispPrompt :- prompt(_, '> ').

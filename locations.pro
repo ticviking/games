@@ -17,7 +17,8 @@ place(X in New):-
 
 %initial item placement
 :-
-  place infinate_wrenches in inventory,
+  place player in bridge,
+  place wrenches in inventory,
   place captain in bridge.
 
 
