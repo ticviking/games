@@ -70,7 +70,7 @@ get_input(Input) :-
 
 % Reads a sentence from the prompt
 read_sentence(Input) :-
-    readln(Input1, _, ".!?", "_0123456789", lowercase),
+    readln(Input1, _, ".!?\n", "_0123456789", lowercase),
     strip_punctuation(Input1, Input).
 
 % Strips punctuation out of the user input

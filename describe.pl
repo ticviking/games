@@ -1,14 +1,18 @@
 % Storing Text for descriptions
 
-:- module(describe, [describe/1, short-describe/1]).
+:- module(describe, [describe/1, short_describe/1]).
 
 describe(X) :-
   describe(X, Y, _),
-  writef(Y).
+  writef(Y), nl.
+describe(X) :-
+  writef("I don't know what %t is.", [X]), nl.
 
-short-describe(X) :-
-  describe(X,_,Y),
-  writef(Y).
+short_describe(X) :-
+  describe(X,_,Y) ,
+  writef(Y), nl.
+short_describe(X) :-
+  writef("I don't know what %t is.", X), nl.
 
 % Locations Descriptions.
 describe(bridge,
@@ -26,6 +30,9 @@ describe(quarters,
 describe(galley,
   "A galley long",
   "A galley short").
+describe(hall,
+  "A hall long",
+   "A hall short").
 describe(cargo_bay,
   "A cargo_bay long",
   "A cargo_bay short").
@@ -122,3 +129,5 @@ describe(straw_man,
 describe(nothing,
   "A nothing long",
   "A nothing short").
+
+%items Description.
