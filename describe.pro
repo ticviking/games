@@ -1,11 +1,12 @@
 % Storing Text for descriptions
 :- module(describe, [describe/1, short_describe/1]).
+:- use_module(utility).
 
 % describe a multi line item. Workaround for max string lengths by keeping strings less than 80.
 describe(X) :-
   describe(X,Y, _),
   is_list(Y),
-  writelist(Y).
+  writelist(Y), nl.
 %single line item
 describe(X) :-
   describe(X, Y, _),
@@ -18,11 +19,9 @@ short_describe(X) :-
   describe(X,_,Y) ,
   writef(Y), nl.
 short_describe(X) :-
-  writef("I don't know what %t is.", X), nl.
+  writef("I don't know what %t is.", [X]), nl.
 
-  writelist([Head|Tail]) :-
-  writef(Head), writelist(Tail).
-  writelist([]).
+
 
 describe(intro, [
   'You awaken to a crushing headache.\n\n',
