@@ -56,6 +56,10 @@ process_input([go, Direction]) :-
     player_location(Current),
     connected(Current, Direction, NewRoom),
     change_area(NewRoom).
+process_input([north]):- process_input([go, north]).
+process_input([south]):- process_input([go, south]).
+process_input([east]):- process_input([go, east]).
+process_input([west]):- process_input([go, west]).
 
 process_input([go, _]) :-
     print('You hit an invisible wall and can\'t go that way'), nl, nl.
