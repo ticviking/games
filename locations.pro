@@ -17,9 +17,39 @@ place(X in New):-
 
 %initial item placement
 :-
+%bridge
   place player in bridge,
-  place wrenches in inventory,
-  place captain in bridge.
+    place wrenches in inventory,
+  place captain in bridge,
+%ballroom
+  place guests in ballroom,
+%quarters
+  place wardrobe in quarters,
+    place bikini in wardrobe,
+%galley
+  place cooler in galley,
+  place bear in cooler,
+%cargo_bay
+  place motorbike in cargo_bay,
+  place hanger_door in motorbike,
+%hall
+  % nothing here
+% engineering
+  place shrink_ray in engineering,
+  place fuel_storage in engineering,
+    place wine_cooler in fuel_storage,
+% head
+  place toilet in head,
+% pipes
+  place poo in pipes,
+%Space locations
+  place pill in pill_space,
+  place smadf_ship in smadf_space,
+  place red_herring in junk_heap,
+  place straw_man in junk_heap,
+  place nothing in achievement_space.
+
+
 
 
 connected(bridge, south, ballroom).
