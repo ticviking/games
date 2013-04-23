@@ -14,6 +14,7 @@ user:prolog_file_type(pro, prolog).
 :- use_module(describe).
 :- use_module(locations).
 :- use_module(objects).
+:- use_module(utility).
 
 % Players current location
 player_location(Location) :-
@@ -82,6 +83,20 @@ process_input([look]) :-
   describe(Current), nl,
   writef("There are the following things here:\n"),
   bagof(Item, Item in Current,  Items),
+  print_item_list(Items).
+process_input([look, polar]) :-
+  do_look(bear).
+process_input([look, shrink]) :-
+  do_look(shrink_ray).
+  process_input([look, ray]) :-
+  do_look(shrink_ray).
+process_input([look, Item]) :-
+  do_look(Item).
+
+do_look(Item) :-
+  player in Current, 
+  (Item in Current; Item in inventory),
+  describe Item.
 
 % Add some help output here to explain how to play your game
 process_input([help]) :-
@@ -108,7 +123,7 @@ process_input([drop, Item]) :-
   player in Current,
   place Item in Current.
 process_input([drop, _]) :-
-  writef("You don't have that.\n")
+  writef("You don't have that.\n").
 
 % Unknown Input
 process_input([_]) :-

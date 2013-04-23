@@ -7,9 +7,9 @@
 
 takable(X) :-
   not(untakable(X)),
-  (not(Item in wardrobe);
+  (not(X in wardrobe);
   opened(wardrobe)),
-  (not(Item in cooler);
+  (not(X in cooler);
   opened(cooler)),
   is_takable(X).
 
@@ -17,6 +17,7 @@ is_takable(bear) :-
   bikini in bear,
   wine_cooler in bear,
   writef("The bear climbs into your pockets, somehow... it must have a spatial distortion field.").
+is_takable(_). %unless it's untakable default to take.
 
 untakable(captain) :-
   writef("The Captain looks at you sternly and you decide not to try and put him in your pocket.\n").
