@@ -71,6 +71,13 @@ process_input([go, _]) :-
 process_input([exit]) .
 process_input([quit]).
 
+process_input([look]) :-
+  player in Current,
+  describe(Current), nl,
+  writef("There are the following things here:\n"),
+  bagof(Item, Item in Current,  Items),
+  foreach(member(X, Items), short_describe(X)).
+
 % Add some help output here to explain how to play your game
 process_input([help]) :-
   describe(help), nl.
