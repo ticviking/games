@@ -23,6 +23,7 @@ player_location(Location) :-
 %dynamic facts for the win condition
 :- dynamic smadf_distracted/0.
 :- dynamic ship_started/0.
+:- dynamic shrunk/1.
 
 % This rule starts everything off
 play :-
@@ -114,12 +115,20 @@ process_input([take, Item]) :- %Item is not there.
   short_describe(Item), writef(" is not here.\n").
 process_input([take, _]). %fallthrough and don't print the headache thing
 
+process_input([drop, pill]) :-
+  pill in inventory,
+  player in engineering,
+  place pill in limbo,
+  assert(ship_started),
+  writef("The engineering crew feeds the pill to the ship, which begins to rumble as it powers on.")
 process_input([drop, Item]) :-
   Item in inventory,
   player in Current,
   place Item in Current.
 process_input([drop, _]) :-
   writef("You don't have that.\n").
+
+
 process_input([give, bikini, polar, bear]):- process_input([give, bikini, bear]).
 process_input([give, bikini, bear]):-
   player in Current,
