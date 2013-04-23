@@ -19,13 +19,13 @@ short_describe(X) :-
   describe(X,_,Y) ,
   writef(Y).
 short_describe(X) :-
-  writef("I don't know what %t is.", [X]), nl.
+  writef("I don't know what %t is.", [X]).
 
 describe(help, [
   'You are very hungover, and don\'t remember how to do much. You do remember\n',
   'how to do these things though:\n=====\n',
   'help - help yourself out by remembering how to do things.\n',
-  'go [direction] - attempt to move in a direction.\n',
+  'go [north|south|east|west] - attempt to move in a direction.\n',
   'take, pick up, loot [item] - try to take an item and put it in your inventory.\n',
   'drop, litter - leave an item somewhere.\n',
   'inventory, pockets - see what you\'re carrying around with you.\n',

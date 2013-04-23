@@ -41,6 +41,7 @@ win :-
 % Prints out the players current location description
 print_location :-
     player_location(Current),
+    nl, writef("You are in: "),
     short_describe(Current),
     %TODO - List the objects that are there.
     nl.
@@ -63,7 +64,7 @@ process_input([east]):- process_input([go, east]).
 process_input([west]):- process_input([go, west]).
 process_input([go, _]) :-
     not(player in space),
-    print('You hit an invisible wall and can\'t go that way'), nl, nl.
+    print('You can\'t go that way'), nl, nl.
 process_input([go, _]) :-
   player in space,
   print('How, you don\'t have anything to push off of!').
@@ -76,13 +77,16 @@ process_input([look]) :-
   describe(Current), nl,
   writef("There are the following things here:\n"),
   bagof(Item, Item in Current,  Items),
-  foreach(member(X, Items), short_describe(X)).
+  foreach(member(X, Items), (
+    writef("\t"), short_describe(X), nl)).
 
 % Add some help output here to explain how to play your game
 process_input([help]) :-
   describe(help), nl.
 
 process_input([pick, up, Item]):- process_input([take, Item]).
+process_input([loot, Item]):- process_input([take, Item]).
+
 % take item generic
 process_input([take, Item]) :-
   player_location(Current),
@@ -95,6 +99,13 @@ process_input([take, Item]) :- %Item is not there.
   player in Current,
   not(Item in Current),
   short_describe(Item), writef(" is not here.\n").
+
+process_input([drop, Item]) :-
+  Item in inventory,
+  player in Current,
+  place Item in Current.
+process_input([drop, _]) :-
+  writef("You don't have that.\n")
 
 % Unknown Input
 process_input([_]) :-
