@@ -19,7 +19,7 @@ short_describe(X) :-
   describe(X,_,Y) ,
   writef(Y).
 short_describe(X) :-
-  writef("I don't know what %t is.", [X]).
+  writef("%t is unknown. It", [X]).
 
 describe(help, [
   'You are very hungover, and don\'t remember how to do much. You do remember\n',
@@ -118,8 +118,12 @@ describe(acheivement_space,
 
 %Item descriptions
 describe(captain,
-  'A captain long',
-  'A captain short').
+['A man ever so slightly older than should be piloting a craft powered by\n',
+ 'parties. His haunted eyes carry the full weight of a thousand hangovers.\n',
+ 'But aside from that, the sort of generic explorer of space to be expected in\n',
+'scenarios such as this. \n'
+],
+  'The captain').
 describe(guests,
   'A guests long',
   'A guests short').

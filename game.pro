@@ -93,11 +93,6 @@ process_input([look, shrink]) :-
 process_input([look, Item]) :-
   do_look(Item).
 
-do_look(Item) :-
-  player in Current, 
-  (Item in Current; Item in inventory),
-  describe Item.
-
 % Add some help output here to explain how to play your game
 process_input([help]) :-
   describe(help), nl.
@@ -117,6 +112,7 @@ process_input([take, Item]) :- %Item is not there.
   player in Current,
   not(Item in Current),
   short_describe(Item), writef(" is not here.\n").
+process_input([take, _]). %fallthrough and don't print the headache thing
 
 process_input([drop, Item]) :-
   Item in inventory,
@@ -128,6 +124,17 @@ process_input([drop, _]) :-
 % Unknown Input
 process_input([_]) :-
     writef("Just thinking about it makes your head hurt, maybe you should try something else"), nl, nl.
+
+%%%%%%%%%%%%
+% Misc verb clauses that haven't been factored into their own module cuz I'm out of time
+%%%%%%%%%%%%%
+
+do_look(Item) :-
+  player in Current,
+  (Item in Current; Item in inventory),
+  describe(Item).
+
+
 
 %%%% Below is just some basic input handling, you probably don't have to mess with it %%%%
 
