@@ -55,7 +55,12 @@ change_area(NewArea) :-
 % Displays the player prompt so they can enter actions
 dispPrompt :- prompt(_, '> ').
 
-% Handling of the action 'go _______', and a good example of how you might implement others
+%TODO - handle special go cases that trigger events
+
+% go in cargo_bay with bear in pocket.
+% go west from sewer and unshrink
+
+
 process_input([go, Direction]) :-
     player_location(Current),
     connected(Current, Direction, NewRoom),
