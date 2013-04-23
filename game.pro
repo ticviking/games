@@ -153,6 +153,9 @@ process_input([give, Item, Target]) :-
   not(Item in inventory),
   writef("You don't have "), short_describe(Item).
 
+process_input([Open, Obj]) :-
+  openable(X), open(X).
+
 % Unknown Input
 process_input([_]) :-
     writef("Just thinking about it makes your head hurt, maybe you should try something else"), nl, nl.
@@ -160,7 +163,21 @@ process_input([_]) :-
 %%%%%%%%%%%%
 % Misc verb clauses that haven't been factored into their own module cuz I'm out of time
 %%%%%%%%%%%%%
-
+do_look(Item) :-
+  player in Current,
+  (Item in Current; Item in inventory),
+  _ in item,
+  (not(opeable(Item)); opened(Item)),
+  short_describe(Item),
+  writef(" inside are:\n"),
+  bagof(X, X in Item, Contents),
+  foreach(X, Contents,
+    (writef("\t\t"), short_describe(X), nl)
+    ).
+do_look(Item) :-
+  openable(Item), not(opened(item)),
+  short_describe(Item),
+  writef(" It is closed.").
 do_look(Item) :-
   player in Current,
   (Item in Current; Item in inventory),
