@@ -13,10 +13,6 @@ takable(X) :-
   opened(cooler)),
   is_takable(X).
 
-is_takable(bear) :-
-  bikini in bear,
-  wine_cooler in bear,
-  writef("The bear climbs into your pockets, somehow... it must have a spatial distortion field.").
 is_takable(_). %unless it's untakable default to take.
 
 untakable(captain) :-

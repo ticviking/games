@@ -120,6 +120,38 @@ process_input([drop, Item]) :-
   place Item in Current.
 process_input([drop, _]) :-
   writef("You don't have that.\n").
+process_input([give, bikini, polar, bear]):- process_input([give, bikini, bear]).
+process_input([give, bikini, bear]):-
+  player in Current,
+  (bear in Current; (player in galley, bear in cooler)),
+  bikini in inventory,
+  place bikini in bear,
+  writef("The bear thanks you, and hurriedly puts it's bikini on.\n").
+process_input([give, wine, cooler, polar, bear]):- process_input([give, wine, cooler, bear]).
+process_input([give, wine, cooler, bear]):-
+  wine_cooler in inventory,
+  not(bikini in bear),
+  writef("The bear refuses your gift saying it is ashamed to drink while naked\n").
+process_input([give, wine, cooler, bear]):-
+  wine_cooler in inventory,
+  player in Current,
+  (bear in Current;( player in galley, bear in cooler)),
+  place wine_cooler in bear,
+  place bear in inventory,
+  writef("The bear begins drinking, and climbs into your pockets somehow...\n It must have a spatial distortion field.").
+process_input([give, _, Target]) :-
+  location(Target), writef("You can't give a location anything").
+process_input([give, _, Target]) :-
+  player in Current, not(Target in Current),
+   writef("%t is not at %t", [Target, Current]).
+process_input([give, Item, Target]) :-
+  Item in inventory,
+  player in Current,
+  Target in Current,
+  writef("%t doesn't want %t", [Target, Item]).
+  process_input([give, Item, _]) :-
+  not(Item in inventory),
+  writef("You don't have "), short_describe(Item).
 
 % Unknown Input
 process_input([_]) :-

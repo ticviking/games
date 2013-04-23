@@ -2,20 +2,23 @@
                                      op(50, xfx, in),
                                      op(60, fx, place),
                                     in/2,
-                                    place/1]).
+                                    place/1,
+                                    location/1]).
 
 :- dynamic in/2.
 
+is_outer_space(near_space).
+is_outer_space(pill_space).
+is_outer_space(smadf_space).
+is_outer_space(junk_heap).
+is_outer_space(deep_space).
+is_outer_space(deeper_space).
+is_outer_space(deepest_space).
+is_outer_space(nothing_space).
+is_outer_space(achievement_space).
+
 player in space :-
-  player in near_space;
-  player in pill_space;
-  player in smadf_space;
-  player in junk_heap;
-  player in deep_space;
-  player in deeper_space;
-  player in deepest_space;
-  player in nothing_space;
-  player in achievement_space.
+  is_outer_space(X), player in X.
 
 place(X in New) :-
   not(X in _ ),
@@ -77,3 +80,15 @@ connected(hall, west, cargo_bay).
 connected(cargo_bay, east, hall).
 connected(engineering, north, hall).
 connected(head, west, hall).
+
+location(bridge).
+location(ballroom).
+location(quarters).
+location(galley).
+location(hall).
+location(cargo_bay).
+location(head).
+location(X) :-
+  is_outer_space(X).
+
+
