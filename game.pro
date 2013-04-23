@@ -13,6 +13,7 @@ user:prolog_file_type(pro, prolog).
 :- use_module(library(readln)).
 :- use_module(describe).
 :- use_module(locations).
+:- use_module(objects).
 
 % Players current location
 player_location(Location) :-
@@ -74,12 +75,19 @@ process_input([quit]).
 process_input([help]) :-
   describe(help), nl.
 
+process_input([pick, up, Item]):- process_input([take, Item]).
 % take item generic
 process_input([take, Item]) :-
   player_location(Current),
-  Item in Current,
+  (Item in Current; %this is here and not in takable so as to avoid circular modules
+    (Item in Z, Z in Current)),
+  takable(Item),
   place Item in inventory,
-  writef("You take "), short_describe(Item), writef(" and place it in your inventory.").
+  writef("You take "), short_describe(Item), writef(" and place it in your inventory.\n").
+process_input([take, Item]) :- %Item is not there.
+  player in Current,
+  not(Item in Current),
+  short_describe(Item), writef(" is not here.\n").
 
 % Unknown Input
 process_input([_]) :-
